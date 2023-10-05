@@ -8,6 +8,7 @@ $(document).ready(function () {
   let count = 1;
   countDiv.text(count);
 
+  //making a api call
   function apiCall() {
     $.ajax({
       url: "WEQ.json",
@@ -28,8 +29,8 @@ $(document).ready(function () {
     // Clear existing table rows
     tableHospital.empty();
 
+    // Pagination by using slice
     hospitalData?.slice(count * 10 - 10, count * 10).map(function (data) {
-      // Pagination by using slice
       tableHospital.append(`
                 <tr>
                     <td>${data["Sr. No."]}</td>
@@ -51,7 +52,7 @@ $(document).ready(function () {
   });
 
   next.on("click", function () {
-    if (count < Math.ceil(hospitalData.length / 10)) {
+    if (count < Math.ceil(hospitalData.length / 10)) {        //logic for not exceding the limit
       count++;
       countDiv.text(count);
       createTable(hospitalData); // Pass hospitalData as an argument
